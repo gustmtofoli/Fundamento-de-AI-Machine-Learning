@@ -1,1 +1,1 @@
-# Fundamento-de-AI-Machine-Learning
+# Nanodegree: Fundamentos de AI & Machine Learning

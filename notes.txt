@@ -1,0 +1,32 @@
+ALGORITHMS:
+
+Árvore de decisão
+Naive bayes
+Descida de gradiente
+Regressão linear
+Regressão logística
+SVM
+Redes neurais
+Método de kernel
+Desafio: qual método resolve o XOR?
+k-means clustering
+Cluster hierárquico
+
+================================
+
+COMMANDS ANACONDA:
+
+source activate <env>
+conda create -n <env>
+conda upgrade conda
+conda upgrade --all
+export export PATH="/Users/username/anaconda/bin:$PATH"
+
+=================================
+
+- biblioteca para trabalhar com fuso horário: pytz
+- instalar requirements.txt pelo pip: pip install -r requirements.txt
+
+
+
+
