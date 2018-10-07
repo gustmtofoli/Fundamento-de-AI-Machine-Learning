@@ -6,8 +6,9 @@ import matplotlib.pyplot as plt
 
 # Vamos ler os dados como uma lista
 print("Lendo o documento...")
-with open("chicago.csv", "r") as file_read:
-    reader = csv.reader(file_read)
+s = r'C:\Users\kelle\Documents\Pintuxo\Desenvolvimento\chicago_bikeshare_pt\chicago.csv'
+with open(s, "r") as file_read:
+    reader = csv.DictReader(file_read)
     data_list = list(reader)
 print("Ok!")
 
@@ -30,18 +31,22 @@ input("Aperte Enter para continuar...")
 print("\n\nTAREFA 1: Imprimindo as primeiras 20 amostras")
 
 # Vamos mudar o data_list para remover o cabeçalho dele.
-data_list = data_list[1:]
+
+# data_list = data_list[1:]
+print(data_list[:20])
 
 # Nós podemos acessar as features pelo índice
 # Por exemplo: sample[6] para imprimir gênero, ou sample[-2]
+
 
 input("Aperte Enter para continuar...")
 # TAREFA 2
 # TODO: Imprima o `gênero` das primeiras 20 linhas
 
 print("\nTAREFA 2: Imprimindo o gênero das primeiras 20 amostras")
-
-
+data_list_first_20 = data_list[:20]
+genders = [reg['Gender'] for reg in data_list_first_20]
+print(genders)
 # Ótimo! Nós podemos pegar as linhas(samples) iterando com um for, e as colunas(features) por índices.
 # Mas ainda é difícil pegar uma coluna em uma lista. Exemplo: Lista com todos os gêneros
 
@@ -49,9 +54,8 @@ input("Aperte Enter para continuar...")
 # TAREFA 3
 # TODO: Crie uma função para adicionar as colunas(features) de uma lista em outra lista, na mesma ordem
 def column_to_list(data, index):
-    column_list = []
     # Dica: Você pode usar um for para iterar sobre as amostras, pegar a feature pelo seu índice, e dar append para uma lista
-    return column_list
+    return [list(reg.values())[index] for reg in data]
 
 
 # Vamos checar com os gêneros se isso está funcionando (apenas para os primeiros 20)
@@ -68,8 +72,9 @@ input("Aperte Enter para continuar...")
 # Agora sabemos como acessar as features, vamos contar quantos Male (Masculinos) e Female (Femininos) o dataset tem
 # TAREFA 4
 # TODO: Conte cada gênero. Você não deveria usar uma função para isso.
-male = 0
-female = 0
+# print()
+male = len([reg['Gender'] for reg in data_list if reg['Gender'] == 'Male'])
+female = len([reg['Gender'] for reg in data_list if reg['Gender'] == 'Female'])
 
 
 # Verificando o resultado
@@ -189,15 +194,15 @@ input("Aperte Enter para continuar...")
 # TAREFA 11
 # Volte e tenha certeza que você documentou suas funções. Explique os parâmetros de entrada, a saída, e o que a função faz. Exemplo:
 # def new_function(param1: int, param2: str) -> list:
-      """
-      Função de exemplo com anotações.
-      Argumentos:
-          param1: O primeiro parâmetro.
-          param2: O segundo parâmetro.
-      Retorna:
-          Uma lista de valores x.
-
-      """
+      # """
+      # Função de exemplo com anotações.
+      # Argumentos:
+      #     param1: O primeiro parâmetro.
+      #     param2: O segundo parâmetro.
+      # Retorna:
+      #     Uma lista de valores x.
+      #
+      # """
 
 input("Aperte Enter para continuar...")
 # TAREFA 12 - Desafio! (Opcional)
