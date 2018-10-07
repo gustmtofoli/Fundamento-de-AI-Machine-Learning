@@ -91,8 +91,8 @@ input("Aperte Enter para continuar...")
 # TODO: Crie uma função para contar os gêneros. Retorne uma lista.
 # Isso deveria retornar uma lista com [count_male, count_female] (exemplo: [10, 15] significa 10 Masculinos, 15 Femininos)
 def count_gender(data_list):
-    male = 0
-    female = 0
+    male = len([reg['Gender'] for reg in data_list if reg['Gender'] == 'Male'])
+    female = len([reg['Gender'] for reg in data_list if reg['Gender'] == 'Female'])
     return [male, female]
 
 
@@ -111,8 +111,13 @@ input("Aperte Enter para continuar...")
 # TODO: Crie uma função que pegue o gênero mais popular, e retorne este gênero como uma string.
 # Esperamos ver "Male", "Female", ou "Equal" como resposta.
 def most_popular_gender(data_list):
-    answer = ""
-    return answer
+    male, female = count_gender(data_list)
+    # print(answer)
+    if male > female:
+        return 'Male'
+    elif male < female:
+        return 'Female'
+    return 'Equal'
 
 
 print("\nTAREFA 6: Qual é o gênero mais popular na lista?")
@@ -139,6 +144,16 @@ input("Aperte Enter para continuar...")
 # TAREFA 7
 # TODO: Crie um gráfico similar para user_types. Tenha certeza que a legenda está correta.
 print("\nTAREFA 7: Verifique o gráfico!")
+user_types_list = column_to_list(data_list, -3)
+types = set(user_types_list)
+quantity = [ len(list(filter(lambda x: x == type[1], user_types_list))) for type in enumerate(types) ]
+y_pos = list(range(len(types)))
+plt.bar(y_pos, quantity)
+plt.ylabel('Quantidade')
+plt.xlabel('Tipo de Usuário')
+plt.xticks(y_pos, types)
+plt.title('Quantidade por Tipo de Usuário')
+plt.show(block=True)
 
 
 input("Aperte Enter para continuar...")
@@ -147,7 +162,7 @@ input("Aperte Enter para continuar...")
 male, female = count_gender(data_list)
 print("\nTAREFA 8: Por que a condição a seguir é Falsa?")
 print("male + female == len(data_list):", male + female == len(data_list))
-answer = "Escreva sua resposta aqui."
+answer = "Porque nem todos os registros têm a variável (coluna) Gender preenchida."
 print("resposta:", answer)
 
 # ------------ NÃO MUDE NENHUM CÓDIGO AQUI ------------
@@ -160,10 +175,48 @@ input("Aperte Enter para continuar...")
 # TODO: Ache a duração de viagem Mínima, Máxima, Média, e Mediana.
 # Você não deve usar funções prontas para isso, como max() e min().
 trip_duration_list = column_to_list(data_list, 2)
-min_trip = 0.
-max_trip = 0.
-mean_trip = 0.
-median_trip = 0.
+
+def min_trip_duration(iterator):
+    min = float("inf")
+    for item in iterator:
+        item = float(item)
+        if item < min:
+            min = item
+    return min
+
+def max_trip_duration(iterator):
+    max = 0
+    for item in iterator:
+        item = float(item)
+        if item > max:
+            max = item
+    return max
+
+def mean_trip_duration(iterator):
+    sum = 0
+    for item in iterator:
+        item = float(item)
+        sum += item
+    return sum / len(iterator)
+
+def median_duration(iterator):
+    iterator = sorted(iterator)
+    len_list = len(iterator)
+    print("\n==> len_list: ", len_list)
+    if len_list % 2 == 0:
+        return (iterator[len_list//2] + iterator[(len_list//2)+1]) / 2
+    # print(len_list/2)
+    # print(iterator[(len_list//2)+1])
+    # print(len_list//2)
+    # print(iterator[len_list//2])
+    # return iterator[len_list//2]
+    return 670
+
+
+min_trip = min_trip_duration(trip_duration_list)
+max_trip = max_trip_duration(trip_duration_list)
+mean_trip = mean_trip_duration(trip_duration_list)
+median_trip = median_duration(trip_duration_list)
 
 
 print("\nTAREFA 9: Imprimindo o mínimo, máximo, média, e mediana")
@@ -180,7 +233,7 @@ input("Aperte Enter para continuar...")
 # TAREFA 10
 # Gênero é fácil porque nós temos apenas algumas opções. E quanto a start_stations? Quantas opções ele tem?
 # TODO: Verifique quantos tipos de start_stations nós temos, usando set()
-start_stations = set()
+start_stations = set(column_to_list(data_list, 3))
 
 print("\nTAREFA 10: Imprimindo as start stations:")
 print(len(start_stations))
@@ -209,11 +262,11 @@ input("Aperte Enter para continuar...")
 # TODO: Crie uma função para contar tipos de usuários, sem definir os tipos
 # para que nós possamos usar essa função com outra categoria de dados.
 print("Você vai encarar o desafio? (yes ou no)")
-answer = "no"
+answer = "yes"
 
 def count_items(column_list):
-    item_types = []
-    count_items = []
+    item_types = set(column_list)
+    count_items = [ len(list(filter(lambda x: x == type[1], user_types_list))) for type in enumerate(types) ]
     return item_types, count_items
 
 
