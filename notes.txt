@@ -16,7 +16,7 @@ Cluster hierárquico
 
 COMMANDS ANACONDA:
 
-source activate <env>
+conda activate <env>
 conda create -n <env>
 conda upgrade conda
 conda upgrade --all

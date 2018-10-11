@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 # Vamos ler os dados como uma lista
 print("Lendo o documento...")
-s = r'C:\Users\kelle\Documents\Pintuxo\Desenvolvimento\chicago_bikeshare_pt\chicago.csv'
+s = '/home/gustavo/Documentos/chicago-bikeshare-pt/chicago_bikeshare_pt/chicago.csv'
 with open(s, "r") as file_read:
     reader = csv.DictReader(file_read)
     data_list = list(reader)
