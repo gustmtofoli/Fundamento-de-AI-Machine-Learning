@@ -55,6 +55,13 @@ input("Aperte Enter para continuar...")
 # TODO: Crie uma função para adicionar as colunas(features) de uma lista em outra lista, na mesma ordem
 def column_to_list(data, index):
     # Dica: Você pode usar um for para iterar sobre as amostras, pegar a feature pelo seu índice, e dar append para uma lista
+    """
+    Argumentos:
+        data: lista de dicionários
+        index: número inteiro representando o índice do dicionário
+    Retorno:
+        lista contendo os dados de um dos dicionários da lista passada por parâmetro
+    """
     return [list(reg.values())[index] for reg in data]
 
 
@@ -91,6 +98,12 @@ input("Aperte Enter para continuar...")
 # TODO: Crie uma função para contar os gêneros. Retorne uma lista.
 # Isso deveria retornar uma lista com [count_male, count_female] (exemplo: [10, 15] significa 10 Masculinos, 15 Femininos)
 def count_gender(data_list):
+    """
+    Argumentos:
+        data_list: lista de dicionários
+    Retorno:
+        lista contendo o total de registros dos gêneros 'Male' e 'Female', respectivamente
+    """
     male = len([reg['Gender'] for reg in data_list if reg['Gender'] == 'Male'])
     female = len([reg['Gender'] for reg in data_list if reg['Gender'] == 'Female'])
     return [male, female]
@@ -111,8 +124,15 @@ input("Aperte Enter para continuar...")
 # TODO: Crie uma função que pegue o gênero mais popular, e retorne este gênero como uma string.
 # Esperamos ver "Male", "Female", ou "Equal" como resposta.
 def most_popular_gender(data_list):
+    """
+    Argumentos:
+        data_list: lista de dicionários
+    Retorno:
+        Objeto do tipo String, sendo 'Male' se o maior número de registros for do gênero 'Male',
+        'Female' caso o maior númerop de registros dor do gênero 'Female' e
+        'Equal' se forem iguais.
+    """
     male, female = count_gender(data_list)
-    # print(answer)
     if male > female:
         return 'Male'
     elif male < female:
@@ -177,6 +197,12 @@ input("Aperte Enter para continuar...")
 trip_duration_list = column_to_list(data_list, 2)
 
 def min_trip_duration(list_trip):
+    """
+    Argumentos:
+        list_trip: lista
+    Retorno:
+        Menor valor contido na lista
+    """
     min = float("inf")
     for item in list_trip:
         item = float(item)
@@ -185,6 +211,12 @@ def min_trip_duration(list_trip):
     return min
 
 def max_trip_duration(list_trip):
+    """
+    Argumentos:
+        list_trip: lista
+    Retorno:
+        Maior valor contido na lista
+    """
     max = 0
     for item in list_trip:
         item = float(item)
@@ -193,6 +225,12 @@ def max_trip_duration(list_trip):
     return max
 
 def mean_trip_duration(list_trip):
+    """
+    Argumentos:
+        list_trip: lista
+    Retorno:
+        média aritmética simples dos valores contidos na lista
+    """
     sum = 0
     for item in list_trip:
         item = float(item)
@@ -200,12 +238,15 @@ def mean_trip_duration(list_trip):
     return sum / len(list_trip)
 
 def median_duration(list_trip):
+    """
+    Argumentos:
+        list_trip: lista
+    Retorno:
+        Mediana referente aos valores contidos na lista
+    """
     list_trip = [float(i) for i in list_trip]
     list_trip.sort()
     len_list = len(list_trip)
-    # print("\n==> len_list: ", len_list)
-    # print("\n>>> iterator[len_list//2 + 1] = ", list_trip[(len_list//2)+1])
-    # print("\n mediana com statistics: ", statistics.median(list_trip))
     if len_list % 2 == 0:
         return (list_trip[len_list-1/2] + list_trip[(len_list+1/2)]) / 2
     return list_trip[(len_list-1)//2]
@@ -263,6 +304,13 @@ print("Você vai encarar o desafio? (yes ou no)")
 answer = "yes"
 
 def count_items(column_list):
+    """
+    Argumentos:
+        column_list: lista
+    Retorno:
+        item_types: lista contendo os items contidos em column_list sem que se repitam
+        count_items: lista contendo o número de registro de cada tipo contido em column_list 
+    """
     item_types = set(column_list)
     count_items = [ len(list(filter(lambda x: x == item[1], column_list))) for item in enumerate(item_types) ]
     return item_types, count_items
