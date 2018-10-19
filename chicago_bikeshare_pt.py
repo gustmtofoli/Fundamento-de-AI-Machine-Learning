@@ -162,7 +162,7 @@ input("Aperte Enter para continuar...")
 male, female = count_gender(data_list)
 print("\nTAREFA 8: Por que a condição a seguir é Falsa?")
 print("male + female == len(data_list):", male + female == len(data_list))
-answer = "Porque nem todos os registros têm a variável (coluna) Gender preenchida."
+answer = "Porque existem registros que não possuem coluna 'Gender' preenchida com 'Male' ou 'Female'. Ao explorar a variável 'Gender' percebe-se que existe um terceiro gênero preenchido com ''."
 print("resposta:", answer)
 
 # ------------ NÃO MUDE NENHUM CÓDIGO AQUI ------------
@@ -176,41 +176,39 @@ input("Aperte Enter para continuar...")
 # Você não deve usar funções prontas para isso, como max() e min().
 trip_duration_list = column_to_list(data_list, 2)
 
-def min_trip_duration(iterator):
+def min_trip_duration(list_trip):
     min = float("inf")
-    for item in iterator:
+    for item in list_trip:
         item = float(item)
         if item < min:
             min = item
     return min
 
-def max_trip_duration(iterator):
+def max_trip_duration(list_trip):
     max = 0
-    for item in iterator:
+    for item in list_trip:
         item = float(item)
         if item > max:
             max = item
     return max
 
-def mean_trip_duration(iterator):
+def mean_trip_duration(list_trip):
     sum = 0
-    for item in iterator:
+    for item in list_trip:
         item = float(item)
         sum += item
-    return sum / len(iterator)
+    return sum / len(list_trip)
 
-def median_duration(iterator):
-    iterator = sorted(iterator)
-    len_list = len(iterator)
-    print("\n==> len_list: ", len_list)
+def median_duration(list_trip):
+    list_trip = [float(i) for i in list_trip]
+    list_trip.sort()
+    len_list = len(list_trip)
+    # print("\n==> len_list: ", len_list)
+    # print("\n>>> iterator[len_list//2 + 1] = ", list_trip[(len_list//2)+1])
+    # print("\n mediana com statistics: ", statistics.median(list_trip))
     if len_list % 2 == 0:
-        return (iterator[len_list//2] + iterator[(len_list//2)+1]) / 2
-    # print(len_list/2)
-    # print(iterator[(len_list//2)+1])
-    # print(len_list//2)
-    # print(iterator[len_list//2])
-    # return iterator[len_list//2]
-    return 670
+        return (list_trip[len_list-1/2] + list_trip[(len_list+1/2)]) / 2
+    return list_trip[(len_list-1)//2]
 
 
 min_trip = min_trip_duration(trip_duration_list)
@@ -266,7 +264,7 @@ answer = "yes"
 
 def count_items(column_list):
     item_types = set(column_list)
-    count_items = [ len(list(filter(lambda x: x == type[1], user_types_list))) for type in enumerate(types) ]
+    count_items = [ len(list(filter(lambda x: x == item[1], column_list))) for item in enumerate(item_types) ]
     return item_types, count_items
 
 
