@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 print("Lendo o documento...")
 s = '/home/gustavo/Documentos/chicago-bikeshare-pt/chicago_bikeshare_pt/chicago.csv'
 with open(s, "r") as file_read:
+    # usando DictReader. Material de referência em https://stackoverflow.com/questions/21572175/convert-csv-file-to-list-of-dictionaries/21572244
     reader = csv.DictReader(file_read)
     data_list = list(reader)
 print("Ok!")
@@ -175,6 +176,15 @@ plt.xticks(y_pos, types)
 plt.title('Quantidade por Tipo de Usuário')
 plt.show(block=True)
 
+# mesmo gráfico da TAREGA 7, porém com escala logarítmica para ser ossível a visualização da quantidade de 'Dependent'
+plt.bar(y_pos, quantity)
+plt.ylabel('Quantidade')
+plt.xlabel('Tipo de Usuário')
+plt.xticks(y_pos, types)
+plt.title('Escala Logarítmica - Quantidade por Tipo de Usuário')
+plt.yscale('log')
+plt.show(block=True)
+
 
 input("Aperte Enter para continuar...")
 # TAREFA 8
@@ -309,10 +319,10 @@ def count_items(column_list):
         column_list: lista
     Retorno:
         item_types: lista contendo os items contidos em column_list sem que se repitam
-        count_items: lista contendo o número de registro de cada tipo contido em column_list 
+        count_items: lista contendo o número de registro de cada tipo contido em column_list
     """
     item_types = set(column_list)
-    count_items = [ len(list(filter(lambda x: x == item[1], column_list))) for item in enumerate(item_types) ]
+    count_items = [len(list(filter(lambda x: x == item[1], column_list))) for item in enumerate(item_types)]
     return item_types, count_items
 
 
