@@ -27,6 +27,11 @@ export export PATH="/Users/username/anaconda/bin:$PATH"
 - biblioteca para trabalhar com fuso horário: pytz
 - instalar requirements.txt pelo pip: pip install -r requirements.txt
 
+=================================
 
+- Converter notebook para html:
+jupyter nbconvert --to html notebook.ipynb
+
+=================================
 
 
