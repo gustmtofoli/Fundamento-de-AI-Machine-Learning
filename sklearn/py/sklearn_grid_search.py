@@ -4,7 +4,8 @@ from sklearn.model_selection import GridSearchCV
 parameters = {'kernel':['poly', 'rbf'],'C':[0.1, 1, 10]}
 
 # criar um pontuador
-from sklearn.metrics import make_scorer from sklearn.metrics import f1_score scorer = make_scorer(f1_score)
+from sklearn.metrics import make_scorer
+from sklearn.metrics import f1_score scorer = make_scorer(f1_score)
 
 # Criar um objeto GridSearch com os parâmetros e o pontuador
 grid_obj = GridSearchCV(clf, parameters, scoring = scorer)
